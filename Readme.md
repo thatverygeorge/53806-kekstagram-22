@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Георгий Киракосян](https://up.htmlacademy.ru/javascript/22/user/53806).
-* Наставник: [Дмитрий Мирошниченко](https://htmlacademy.ru/profile/id591417).
+* Наставник: [Даниил Царёв](https://htmlacademy.ru/profile/id945835).
 
 ---
 
