@@ -1,11 +1,10 @@
 import { getRandomNumber } from './util.js';
 import { createComment } from './create-comment.js';
 
-const DESCRIPTION = 'Lorem ipsum dolor sit amet.';
-
 const createDescription = function () {
   let descriptionID = 0;
   let photoID = 0;
+  const DESCRIPTION = 'Lorem ipsum dolor sit amet.';
 
   return function () {
     return {

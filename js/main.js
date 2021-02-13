@@ -1,6 +1,3 @@
-import { createDescription } from './create-description.js';
+import { renderPictures } from './render-pictures.js';
 
-const descriptions = new Array(25).fill(null).map(createDescription);
-
-// eslint-disable-next-line no-console
-console.log(descriptions);
+renderPictures();
