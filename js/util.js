@@ -1,4 +1,4 @@
-const switchNumbers = function (min, max) {
+const swapNumbers = function (min, max) {
   min = min + max;
   max = min - max;
   min = min - max;
@@ -12,7 +12,7 @@ const getRandomNumber = function (min, max) {
 
   if (min >= 0 && max >=0) {
     if (max < min) {
-      [min, max] = switchNumbers(min, max);
+      [min, max] = swapNumbers(min, max);
     }
 
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -40,7 +40,7 @@ const getUniqueID = function (array, startIndex, endIndex) {
 }
 
 export {
-  switchNumbers,
+  swapNumbers,
   getRandomNumber,
   checkStringLength,
   getRandomElement,
