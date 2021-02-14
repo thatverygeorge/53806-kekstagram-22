@@ -39,10 +39,20 @@ const getUniqueID = function (array, startIndex, endIndex) {
   return id;
 }
 
+const isEscEvent = function (evt) {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+const isEnterEvent = function (evt) {
+  return evt.key === 'Enter';
+};
+
 export {
   swapNumbers,
   getRandomNumber,
   checkStringLength,
   getRandomElement,
-  getUniqueID
+  getUniqueID,
+  isEscEvent,
+  isEnterEvent
 };

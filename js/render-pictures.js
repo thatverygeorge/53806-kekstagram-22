@@ -1,11 +1,11 @@
 import { createDescription } from './create-description.js';
 
+const descriptions = new Array(25).fill(null).map(createDescription);
+
 const renderPictures = function () {
   const picturesList = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const picturesListFragment = document.createDocumentFragment();
-
-  const descriptions = new Array(25).fill(null).map(createDescription);
 
   descriptions.forEach(function (description) {
     const pictureElement = pictureTemplate.cloneNode(true);
@@ -18,4 +18,4 @@ const renderPictures = function () {
   picturesList.appendChild(picturesListFragment);
 };
 
-export { renderPictures };
+export { renderPictures, descriptions };
