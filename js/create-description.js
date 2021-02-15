@@ -12,7 +12,7 @@ const createDescription = function () {
       url: `photos/${++photoID}.jpg`,
       description: DESCRIPTION,
       likes: getRandomNumber(15, 200),
-      comments: new Array(getRandomNumber(1, 5)).fill(null).map(createComment),
+      comments: new Array(getRandomNumber(5, 15)).fill(null).map(createComment),
     };
   };
 }();
