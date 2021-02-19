@@ -46,6 +46,7 @@ const openBigPicture = function (evt) {
   let picture;
 
   if (evt.target.matches('.picture')) {
+    evt.preventDefault();
     picture = descriptions.find(function (description) {
       return evt.target.querySelector('.picture__img').src.includes(description.url);
     });
@@ -70,7 +71,6 @@ const closeBigPicture = function () {
 }
 
 picturesList.addEventListener('click', function (evt) {
-  evt.preventDefault();
   openBigPicture(evt);
 });
 
