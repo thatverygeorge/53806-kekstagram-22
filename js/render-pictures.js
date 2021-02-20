@@ -18,4 +18,6 @@ const renderPictures = function () {
   picturesList.appendChild(picturesListFragment);
 };
 
-export { renderPictures, descriptions };
+renderPictures();
+
+export { descriptions };

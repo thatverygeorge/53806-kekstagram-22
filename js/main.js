@@ -1,4 +1,4 @@
-import { renderPictures } from './render-pictures.js';
+import './render-pictures.js';
 import './big-picture.js';
-
-renderPictures();
+import './image-upload-overlay.js';
+import './effect-level-slider.js';
