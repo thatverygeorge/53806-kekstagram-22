@@ -10,7 +10,7 @@ const getRandomNumber = function (min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
 
-  if (min >= 0 && max >=0) {
+  if (min >= 0 && max >= 0) {
     if (max < min) {
       [min, max] = swapNumbers(min, max);
     }
@@ -47,6 +47,20 @@ const isEnterEvent = function (evt) {
   return evt.key === 'Enter';
 };
 
+const setMyCustomValidity = function (input, message, button) {
+  const INVALID_OUTLINE_STYLE = '2px solid red';
+
+  input.setCustomValidity(message);
+  input.style.outline = INVALID_OUTLINE_STYLE;
+  button.disabled = true;
+}
+
+const removeMyCustomValidity = function (input, button) {
+  input.setCustomValidity('');
+  input.style.outline = '';
+  button.disabled = false;
+}
+
 export {
   swapNumbers,
   getRandomNumber,
@@ -54,5 +68,7 @@ export {
   getRandomElement,
   getUniqueID,
   isEscEvent,
-  isEnterEvent
+  isEnterEvent,
+  setMyCustomValidity,
+  removeMyCustomValidity
 };
