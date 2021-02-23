@@ -5,6 +5,8 @@ const imageUploadInput = document.querySelector('.img-upload__input');
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
 const imageUploadCancel = document.querySelector('.img-upload__cancel');
 
+const INITIAL_IMAGE_SCALE = 100;
+
 const onImageUploadCancelClick = function () {
   closeImageUploadOverlay();
 }
@@ -28,7 +30,9 @@ const openImageUploadOverlay = function () {
   document.querySelector('body').classList.add('modal-open');
   imageUploadCancel.addEventListener('click', onImageUploadCancelClick);
   document.addEventListener('keydown', onImageUploadOverlayEscKeydown);
-  setScaleValue(100);
+  setScaleValue(INITIAL_IMAGE_SCALE);
 }
 
 imageUploadInput.addEventListener('change', openImageUploadOverlay);
+
+export { onImageUploadOverlayEscKeydown };

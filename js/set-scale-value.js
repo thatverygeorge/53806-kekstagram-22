@@ -5,6 +5,10 @@ const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
 let scaleValue = 100;
 
+const MIN_SCALE = 25;
+const MAX_SCALE = 100;
+const SCALE_STEP = 25;
+
 const setScaleValue = function (value) {
   scaleValue = value;
   scaleControlValue.value = `${value}%`;
@@ -12,16 +16,16 @@ const setScaleValue = function (value) {
 }
 
 scaleControlSmaller.addEventListener('click', function () {
-  if (scaleValue >= 50 ) {
-    scaleValue -= 25;
+  if ((scaleValue - SCALE_STEP) >= MIN_SCALE) {
+    scaleValue -= SCALE_STEP;
   }
 
   setScaleValue(scaleValue);
 });
 
 scaleControlBigger.addEventListener('click', function () {
-  if (scaleValue <= 75) {
-    scaleValue += 25;
+  if ((scaleValue + SCALE_STEP) <= MAX_SCALE) {
+    scaleValue += SCALE_STEP;
   }
 
   setScaleValue(scaleValue);
