@@ -1205,6 +1205,7 @@ main {
  * Экраны ошибки и успеха загрузки изображения
  */
 
+.pictures-error,
 .error,
 .success {
   position: fixed;
@@ -1221,6 +1222,7 @@ main {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.pictures-error__inner,
 .error__inner,
 .success__inner {
   position: relative;
@@ -1249,6 +1251,7 @@ main {
   padding-bottom: 75px;
 }
 
+.pictures-error__title,
 .error__title {
   position: relative;
 
@@ -1258,6 +1261,10 @@ main {
   font-size: 32px;
 }
 
+.pictures-error__title {
+  line-height: normal;
+}
+
 .success__title {
   margin: 0;
   margin-bottom: 50px;
@@ -1265,6 +1272,7 @@ main {
   font-size: 32px;
 }
 
+.pictures-error__title::before,
 .error__title::before {
   content: "";
   position: absolute;
@@ -1282,6 +1290,7 @@ main {
           transform: translateX(-50%);
 }
 
+.pictures-error__button,
 .error__button,
 .success__button {
   padding: 5px 10px;
@@ -1294,6 +1303,8 @@ main {
   border-radius: 5px;
 }
 
+.pictures-error__button:hover,
+.pictures-error__button:focus,
 .error__button:hover,
 .error__button:focus,
 .success__button:hover,
@@ -1301,6 +1312,7 @@ main {
   opacity: 0.8;
 }
 
+.pictures-error__button:active,
 .error__button:active,
 .success__button:active {
   opacity: 0.6;
