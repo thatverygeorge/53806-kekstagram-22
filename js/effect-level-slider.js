@@ -1,10 +1,14 @@
 /* eslint-disable no-undef */
+const efectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 const effectLevelValue = document.querySelector('.effect-level__value');
+const effectsPreviewNone = document.querySelector('.effects__preview--none');
 const uploadPreviewImage = document.querySelector('.img-upload__preview img');
 
 const createSlider = function (min = 0, max = 1, start = 1, step = 0.1) {
+  efectLevelFieldset.classList.remove('hidden');
+
   noUiSlider.create(effectLevelSlider, {
     range: {
       min: min,
@@ -28,7 +32,13 @@ const createSlider = function (min = 0, max = 1, start = 1, step = 0.1) {
 }
 
 const destroySlider = function () {
+  efectLevelFieldset.classList.add('hidden');
   effectLevelSlider.noUiSlider.destroy();
+}
+
+const resetEffect = function () {
+  uploadPreviewImage.style.filter = 'none';
+  effectsPreviewNone.click();
 }
 
 const sliderHandler = function (effect) {
@@ -73,7 +83,6 @@ effectsList.addEventListener('change', function (evt) {
     switch (evt.target.value) {
       case 'chrome':
       case 'sepia':
-      case 'none':
         createSlider();
         break;
       case 'marvin':
@@ -85,6 +94,9 @@ effectsList.addEventListener('change', function (evt) {
       case 'heat':
         createSlider(1, 3, 3, 0.1);
         break;
+      case 'none':
+        createSlider();
+        break;
     }
 
     uploadPreviewImage.classList.forEach(function (currentClass) {
@@ -94,3 +106,5 @@ effectsList.addEventListener('change', function (evt) {
     sliderHandler(evt.target.value);
   }
 });
+
+export { resetEffect };

@@ -1,3 +1,5 @@
+const INVALID_OUTLINE_STYLE = '2px solid red';
+
 const swapNumbers = function (min, max) {
   min = min + max;
   max = min - max;
@@ -48,8 +50,6 @@ const isEnterEvent = function (evt) {
 };
 
 const setMyCustomValidity = function (input, message, button) {
-  const INVALID_OUTLINE_STYLE = '2px solid red';
-
   input.setCustomValidity(message);
   input.style.outline = INVALID_OUTLINE_STYLE;
   button.disabled = true;

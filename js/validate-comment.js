@@ -1,10 +1,14 @@
 import { checkStringLength, setMyCustomValidity, removeMyCustomValidity } from './util.js';
 import { onImageUploadOverlayEscKeydown } from './image-upload-overlay.js';
 
+const MAX_COMMENT_LENGTH = 140;
+
 const textDescriptionInput = document.querySelector('.text__description');
 const imageUploadSubmit = document.querySelector('.img-upload__submit');
 
-const MAX_COMMENT_LENGTH = 140;
+const clearTextDescriptionInput = function () {
+  textDescriptionInput.value = '';
+}
 
 const validateComment = function () {
   let message;
@@ -28,3 +32,5 @@ textDescriptionInput.addEventListener('focus', function () {
 textDescriptionInput.addEventListener('blur', function () {
   document.addEventListener('keydown', onImageUploadOverlayEscKeydown);
 });
+
+export { clearTextDescriptionInput };

@@ -1,13 +1,16 @@
-import { createDescription } from './create-description.js';
+import { getData } from './api.js';
 
-const descriptions = new Array(25).fill(null).map(createDescription);
+const errorPopup = document.querySelector('#pictures-error').content.querySelector('.pictures-error');
 
-const renderPictures = function () {
+let descriptions;
+
+const renderPictures = function (json) {
+  descriptions = json;
   const picturesList = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
   const picturesListFragment = document.createDocumentFragment();
 
-  descriptions.forEach(function (description) {
+  json.forEach(function (description) {
     const pictureElement = pictureTemplate.cloneNode(true);
     pictureElement.querySelector('.picture__img').src = description.url;
     pictureElement.querySelector('.picture__likes').textContent = description.likes;
@@ -18,6 +21,6 @@ const renderPictures = function () {
   picturesList.appendChild(picturesListFragment);
 };
 
-renderPictures();
+getData(renderPictures, errorPopup);
 
 export { descriptions };

@@ -1,19 +1,23 @@
 import { checkStringLength, setMyCustomValidity, removeMyCustomValidity } from './util.js';
 import { onImageUploadOverlayEscKeydown } from './image-upload-overlay.js';
 
-const textHashtagsInput = document.querySelector('.text__hashtags');
-const imageUploadSubmit = document.querySelector('.img-upload__submit');
-
 const MAX_HASHTAG_LENGTH = 20;
 const MAX_NUMBER_OF_HASHTAGS = 5;
 const LETTERS_NUMBERS_REG_EXP = /^[A-Za-zА-яа-я0-9]+$/;
 
+const textHashtagsInput = document.querySelector('.text__hashtags');
+const imageUploadSubmit = document.querySelector('.img-upload__submit');
+
+const clearTextHashtagsInput = function () {
+  textHashtagsInput.value = '';
+}
+
 const validateHashtags = function () {
-  const HASHTAGS = textHashtagsInput.value.trim().split(' ');
+  const hashtags = textHashtagsInput.value.trim().split(' ');
   let message;
 
   if (textHashtagsInput.value.length > 0) {
-    HASHTAGS.forEach(function (currentHashtag, currentHashtagIndex, array) {
+    hashtags.forEach(function (currentHashtag, currentHashtagIndex, array) {
       if (array.length > MAX_NUMBER_OF_HASHTAGS) {
         message = `Максимальное количество хэштегов: ${MAX_NUMBER_OF_HASHTAGS}.`;
         setMyCustomValidity(textHashtagsInput, message, imageUploadSubmit);
@@ -58,3 +62,5 @@ textHashtagsInput.addEventListener('focus', function () {
 textHashtagsInput.addEventListener('blur', function () {
   document.addEventListener('keydown', onImageUploadOverlayEscKeydown);
 });
+
+export { clearTextHashtagsInput };
