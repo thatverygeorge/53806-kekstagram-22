@@ -4,6 +4,7 @@ import { resetEffect } from './effect-level-slider.js';
 import { clearTextDescriptionInput } from './validate-comment.js';
 import { clearTextHashtagsInput } from './validate-hastags.js';
 import { sendData } from './api.js';
+import { showPopup } from './show-popup.js'
 
 const INITIAL_IMAGE_SCALE = 100;
 
@@ -52,7 +53,16 @@ imageUploadInput.addEventListener('change', openImageUploadOverlay);
 imageUploadForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
   const data = new FormData(evt.target);
-  sendData(data, closeImageUploadOverlay, closeImageUploadOverlay, successPopup, errorPopup);
+  sendData(
+    data,
+    function () {
+      closeImageUploadOverlay();
+      showPopup(successPopup);
+    },
+    function () {
+      closeImageUploadOverlay();
+      showPopup(errorPopup);
+    });
 });
 
 export { onImageUploadOverlayEscKeydown };
