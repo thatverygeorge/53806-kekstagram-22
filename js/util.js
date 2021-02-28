@@ -61,6 +61,20 @@ const removeMyCustomValidity = function (input, button) {
   button.disabled = false;
 }
 
+const debounce = (cb, timeout) => {
+  let isTimeOut = false;
+  let timeoutID = 0;
+
+  return function (...args) {
+    if (!isTimeOut) {
+      clearTimeout(timeoutID);
+      timeoutID = setTimeout(function () {
+        cb(...args);
+      }, timeout);
+    }
+  };
+};
+
 export {
   swapNumbers,
   getRandomNumber,
@@ -70,5 +84,6 @@ export {
   isEscEvent,
   isEnterEvent,
   setMyCustomValidity,
-  removeMyCustomValidity
+  removeMyCustomValidity,
+  debounce
 };

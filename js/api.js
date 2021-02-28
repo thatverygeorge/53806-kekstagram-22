@@ -1,6 +1,4 @@
-import { showPopup } from './show-popup.js'
-
-const sendData = function (data, onSuccess, onError, successPopup, errorPopup) {
+const sendData = function (data, onSuccess, onError) {
   fetch(
     'https://22.javascript.pages.academy/kekstagram',
     {
@@ -12,12 +10,10 @@ const sendData = function (data, onSuccess, onError, successPopup, errorPopup) {
     .then(function (response) {
       if (response.ok) {
         onSuccess();
-        showPopup(successPopup);
         return response.json();
       }
 
       onError();
-      showPopup(errorPopup);
       throw new Error(`${response.status} — ${response.statusText}`);
     })
     .then(function (json) {
@@ -30,7 +26,7 @@ const sendData = function (data, onSuccess, onError, successPopup, errorPopup) {
     });
 }
 
-const getData = function (onSuccess, errorPopup) {
+const getData = function (onSuccess, onError) {
   fetch(
     'https://22.javascript.pages.academy/kekstagram/data',
     {
@@ -43,11 +39,12 @@ const getData = function (onSuccess, errorPopup) {
         return response.json();
       }
 
-      showPopup(errorPopup);
+      onError();
       throw new Error(`${response.status} — ${response.statusText}`);
     })
     .then(function (json) {
       onSuccess(json);
+      return json;
     })
     .catch(function (err) {
       // eslint-disable-next-line no-console
