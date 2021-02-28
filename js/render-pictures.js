@@ -87,4 +87,8 @@ const setImageFiltersFormHandler = function (cb) {
   });
 }
 
-export { descriptions };
+const getDescriptions = function () {
+  return descriptions;
+}
+
+export { getDescriptions };

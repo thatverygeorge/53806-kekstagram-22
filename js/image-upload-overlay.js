@@ -7,15 +7,19 @@ import { sendData } from './api.js';
 import { showPopup } from './show-popup.js'
 
 const INITIAL_IMAGE_SCALE = 100;
+const FILE_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
 
 const imageUploadForm = document.querySelector('.img-upload__form');
-const efectLevelFieldset = document.querySelector('.img-upload__effect-level');
+const effectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const imageUploadInput = document.querySelector('.img-upload__input');
 const imageUploadOverlay = document.querySelector('.img-upload__overlay');
 const imageUploadCancel = document.querySelector('.img-upload__cancel');
 
 const successPopup = document.querySelector('#success').content.querySelector('.success');
 const errorPopup = document.querySelector('#error').content.querySelector('.error');
+
+const uploadPreviewImage = document.querySelector('.img-upload__preview img');
+const effectsPreviewMiniatures = document.querySelectorAll('.effects__preview');
 
 const onImageUploadCancelClick = function () {
   closeImageUploadOverlay();
@@ -41,14 +45,40 @@ const closeImageUploadOverlay = function () {
 
 const openImageUploadOverlay = function () {
   imageUploadOverlay.classList.remove('hidden');
-  efectLevelFieldset.classList.add('hidden');
+  effectLevelFieldset.classList.add('hidden');
   document.querySelector('body').classList.add('modal-open');
   imageUploadCancel.addEventListener('click', onImageUploadCancelClick);
   document.addEventListener('keydown', onImageUploadOverlayEscKeydown);
   setScaleValue(INITIAL_IMAGE_SCALE);
 }
 
-imageUploadInput.addEventListener('change', openImageUploadOverlay);
+const setMiniatures = function (url) {
+  effectsPreviewMiniatures.forEach(function (miniature) {
+    miniature.style.backgroundImage = `url('${url}')`;
+  });
+}
+
+imageUploadInput.addEventListener('change', function (evt) {
+  openImageUploadOverlay();
+
+  const file = evt.target.files[0];
+  const fileName = file.name.toLowerCase();
+
+  const isValidFile = FILE_TYPES.some(function (type) {
+    return fileName.endsWith(type);
+  })
+
+  if (isValidFile) {
+    const reader = new FileReader();
+
+    reader.addEventListener('load', function () {
+      uploadPreviewImage.src = reader.result;
+      setMiniatures(reader.result);
+    });
+
+    reader.readAsDataURL(file);
+  }
+});
 
 imageUploadForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
