@@ -5,6 +5,7 @@ import { isEscEvent, isEnterEvent } from './util.js';
 const picturesList = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
+const commentsLoader = bigPicture.querySelector('.comments-loader');
 
 const onBigPictureCancelClick = function () {
   closeBigPicture();
@@ -16,6 +17,8 @@ const onBigPictureEscKeydown = function (evt) {
     closeBigPicture();
   }
 }
+
+let addComments;
 
 const bigPictureHandler = function (picture) {
   bigPicture.classList.remove('hidden');
@@ -33,13 +36,13 @@ const bigPictureHandler = function (picture) {
   bigPictureDescription.textContent = picture.description;
 
   document.querySelector('body').classList.add('modal-open');
-  bigPicture.querySelector('.social__comment-count').classList.add('hidden');
-  bigPicture.querySelector('.comments-loader').classList.add('hidden');
 
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick);
   document.addEventListener('keydown', onBigPictureEscKeydown);
 
-  renderComments(picture);
+  clearComments();
+  addComments = renderComments(picture);
+  addComments();
 }
 
 const openBigPicture = function (evt) {
@@ -79,4 +82,8 @@ picturesList.addEventListener('keydown', function (evt) {
     evt.preventDefault();
     openBigPicture(evt);
   }
+});
+
+commentsLoader.addEventListener('click', function () {
+  addComments();
 });

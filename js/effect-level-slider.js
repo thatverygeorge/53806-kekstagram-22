@@ -1,4 +1,5 @@
-/* eslint-disable no-undef */
+/* global noUiSlider:readonly */
+
 const efectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
