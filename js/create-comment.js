@@ -50,6 +50,6 @@ const createComment = function () {
       name: getRandomElement(NAMES),
     };
   };
-}();
+};
 
 export { createComment };

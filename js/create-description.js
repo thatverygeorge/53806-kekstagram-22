@@ -15,6 +15,6 @@ const createDescription = function () {
       comments: new Array(getRandomNumber(5, 15)).fill(null).map(createComment),
     };
   };
-}();
+};
 
 export { createDescription };
