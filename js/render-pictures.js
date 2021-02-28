@@ -75,7 +75,7 @@ const setImageFiltersFormHandler = function (cb) {
 
     if (evt.target.matches('#filter-random')) {
       imageFilterButtonHandler(evt.target);
-      const randomPictures = descriptions.slice(0, NUMBER_OF_RANDOM_PICTURES).sort(shufflePictures);
+      const randomPictures = descriptions.slice().sort(shufflePictures).slice(0, NUMBER_OF_RANDOM_PICTURES);
       cb(randomPictures);
     }
 
