@@ -1,4 +1,4 @@
-import { descriptions } from './render-pictures.js';
+import { getDescriptions } from './render-pictures.js';
 import { clearComments, renderComments } from './render-comments.js';
 import { isEscEvent, isEnterEvent } from './util.js';
 
@@ -47,6 +47,7 @@ const bigPictureHandler = function (picture) {
 
 const openBigPicture = function (evt) {
   let picture;
+  let descriptions = getDescriptions();
 
   if (evt.target.matches('.picture')) {
     evt.preventDefault();
