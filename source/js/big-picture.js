@@ -2,10 +2,22 @@ import { getDescriptions } from './render-pictures.js';
 import { clearComments, renderComments } from './render-comments.js';
 import { isEscEvent, isEnterEvent } from './util.js';
 
+const bodyElement = document.querySelector('body');
 const picturesList = document.querySelector('.pictures');
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureCancel = document.querySelector('.big-picture__cancel');
 const commentsLoader = bigPicture.querySelector('.comments-loader');
+
+const onCommentsLoaderClick = function () {
+  addComments();
+}
+
+const closeBigPicture = function () {
+  bigPicture.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  clearComments();
+  document.removeEventListener('keydown', onBigPictureEscKeydown);
+}
 
 const onBigPictureCancelClick = function () {
   closeBigPicture();
@@ -20,7 +32,7 @@ const onBigPictureEscKeydown = function (evt) {
 
 let addComments;
 
-const bigPictureHandler = function (picture) {
+const setBigPicture = function (picture) {
   bigPicture.classList.remove('hidden');
 
   const bigPictureImage = bigPicture.querySelector('.big-picture__img img');
@@ -35,7 +47,7 @@ const bigPictureHandler = function (picture) {
   const bigPictureDescription = bigPicture.querySelector('.social__caption');
   bigPictureDescription.textContent = picture.description;
 
-  document.querySelector('body').classList.add('modal-open');
+  bodyElement.classList.add('modal-open');
 
   bigPictureCancel.addEventListener('click', onBigPictureCancelClick);
   document.addEventListener('keydown', onBigPictureEscKeydown);
@@ -43,35 +55,31 @@ const bigPictureHandler = function (picture) {
   clearComments();
   addComments = renderComments(picture);
   addComments();
+
+  commentsLoader.addEventListener('click', onCommentsLoaderClick);
 }
 
 const openBigPicture = function (evt) {
+  const descriptions = getDescriptions();
+  const target = evt.target.closest('.picture');
   let picture;
-  let descriptions = getDescriptions();
+  let element;
 
-  if (evt.target.matches('.picture')) {
+  if (target) {
     evt.preventDefault();
-    picture = descriptions.find(function (description) {
-      return evt.target.querySelector('.picture__img').src.includes(description.url);
+
+    Array.from(target.children).forEach(function (child, index, array) {
+      if (child.classList.contains('picture__img')) {
+        element = array[index];
+      }
     });
 
-    bigPictureHandler(picture);
-  }
-
-  if (evt.target.matches('.picture__img')) {
     picture = descriptions.find(function (description) {
-      return evt.target.src.includes(description.url);
+      return element.src.includes(description.url);
     });
 
-    bigPictureHandler(picture);
+    setBigPicture(picture);
   }
-}
-
-const closeBigPicture = function () {
-  bigPicture.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
-  clearComments();
-  document.removeEventListener('keydown', onBigPictureEscKeydown);
 }
 
 picturesList.addEventListener('click', function (evt) {
@@ -83,8 +91,4 @@ picturesList.addEventListener('keydown', function (evt) {
     evt.preventDefault();
     openBigPicture(evt);
   }
-});
-
-commentsLoader.addEventListener('click', function () {
-  addComments();
 });

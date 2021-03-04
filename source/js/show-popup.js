@@ -2,34 +2,37 @@ import { isEscEvent } from './util.js';
 
 const main = document.querySelector('main');
 
-const closePopup = function (popup) {
+let popup;
+
+const closePopup = function () {
   popup.remove();
+  document.removeEventListener('keydown', onPopupEscKeydown);
 }
 
-const onPopupEscKeydown = function (evt, popup) {
+const onPopupEscKeydown = function (evt) {
   if (isEscEvent(evt)) {
     evt.preventDefault();
     closePopup(popup);
   }
 }
 
-const showPopup = function (popup) {
+const showPopup = function (element) {
+  popup = element;
+
   main.appendChild(popup);
 
   const button = popup.querySelector('button');
 
   button.addEventListener('click', function () {
-    closePopup(popup);
+    closePopup();
     document.removeEventListener('keydown', onPopupEscKeydown);
   })
 
-  document.addEventListener('keydown', function (evt) {
-    onPopupEscKeydown(evt, popup);
-  });
+  document.addEventListener('keydown', onPopupEscKeydown);
 
   popup.addEventListener('click', function (evt) {
     if (evt.target === popup) {
-      closePopup(popup);
+      closePopup();
       document.removeEventListener('keydown', onPopupEscKeydown);
     }
   })
