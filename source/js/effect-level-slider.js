@@ -1,4 +1,5 @@
-/* global noUiSlider:readonly */
+import noUiSlider from 'nouislider';
+import 'nouislider/distribute/nouislider.css';
 
 const efectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
