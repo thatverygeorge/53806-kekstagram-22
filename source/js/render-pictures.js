@@ -50,16 +50,16 @@ const debouncedRenderPictures = debounce(renderPictures, RERENDER_DELAY);
 
 getData(
   function (json) {
+    descriptions = json;
     renderPictures(json);
     setImageFiltersFormHandler(debouncedRenderPictures);
-    descriptions = json;
     imageFilters.classList.remove('img-filters--inactive');
   },
   function () {
     showPopup(errorPopup);
   });
 
-const imageFilterButtonHandler = function (filterButton) {
+const setImageFilterButtonHandler = function (filterButton) {
   imageFiltersButtons.forEach(function (button) {
     button.classList.remove('img-filters__button--active');
   })
@@ -69,18 +69,18 @@ const imageFilterButtonHandler = function (filterButton) {
 const setImageFiltersFormHandler = function (cb) {
   imageFiltersForm.addEventListener('click', function (evt) {
     if (evt.target.matches('#filter-default')) {
-      imageFilterButtonHandler(evt.target);
+      setImageFilterButtonHandler(evt.target);
       cb();
     }
 
     if (evt.target.matches('#filter-random')) {
-      imageFilterButtonHandler(evt.target);
+      setImageFilterButtonHandler(evt.target);
       const randomPictures = descriptions.slice().sort(shufflePictures).slice(0, NUMBER_OF_RANDOM_PICTURES);
       cb(randomPictures);
     }
 
     if (evt.target.matches('#filter-discussed')) {
-      imageFilterButtonHandler(evt.target);
+      setImageFilterButtonHandler(evt.target);
       const sortedPictures = descriptions.slice().sort(comparePicturesByNumberOfComments);
       cb(sortedPictures);
     }

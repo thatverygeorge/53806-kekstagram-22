@@ -5,8 +5,8 @@ const efectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 const effectLevelValue = document.querySelector('.effect-level__value');
-const effectsPreviewNone = document.querySelector('.effects__preview--none');
-const uploadPreviewImage = document.querySelector('.img-upload__preview img');
+const effectInputNone = document.querySelector('#effect-none');
+const previewImage = document.querySelector('.img-upload__preview img');
 
 const createSlider = function (min = 0, max = 1, start = 1, step = 0.1) {
   efectLevelFieldset.classList.remove('hidden');
@@ -39,35 +39,35 @@ const destroySlider = function () {
 }
 
 const resetEffect = function () {
-  uploadPreviewImage.style.filter = 'none';
-  effectsPreviewNone.click();
+  previewImage.style.filter = 'none';
+  effectInputNone.click();
 }
 
-const sliderHandler = function (effect) {
+const setSliderHandler = function (effect) {
   effectLevelSlider.noUiSlider.on('update', function (values, handle) {
     switch (effect) {
       case 'chrome':
-        uploadPreviewImage.style.filter = 'none';
-        uploadPreviewImage.style.filter = `grayscale(${values[handle]})`;
+        previewImage.style.filter = 'none';
+        previewImage.style.filter = `grayscale(${values[handle]})`;
         break;
       case 'sepia':
-        uploadPreviewImage.style.filter = 'none';
-        uploadPreviewImage.style.filter = `sepia(${values[handle]})`;
+        previewImage.style.filter = 'none';
+        previewImage.style.filter = `sepia(${values[handle]})`;
         break;
       case 'marvin':
-        uploadPreviewImage.style.filter = 'none';
-        uploadPreviewImage.style.filter = `invert(${values[handle]}%)`;
+        previewImage.style.filter = 'none';
+        previewImage.style.filter = `invert(${values[handle]}%)`;
         break;
       case 'phobos':
-        uploadPreviewImage.style.filter = 'none';
-        uploadPreviewImage.style.filter = `blur(${values[handle]}px)`;
+        previewImage.style.filter = 'none';
+        previewImage.style.filter = `blur(${values[handle]}px)`;
         break;
       case 'heat':
-        uploadPreviewImage.style.filter = 'none';
-        uploadPreviewImage.style.filter = `brightness(${values[handle]})`;
+        previewImage.style.filter = 'none';
+        previewImage.style.filter = `brightness(${values[handle]})`;
         break;
       case 'none':
-        uploadPreviewImage.style.filter = 'none';
+        previewImage.style.filter = 'none';
         destroySlider();
         break;
     }
@@ -75,6 +75,8 @@ const sliderHandler = function (effect) {
     effectLevelValue.value = values[handle];
   });
 }
+
+let currentEffect;
 
 effectsList.addEventListener('change', function (evt) {
   if (evt.target.matches('.effects__radio')) {
@@ -85,6 +87,7 @@ effectsList.addEventListener('change', function (evt) {
     switch (evt.target.value) {
       case 'chrome':
       case 'sepia':
+      case 'none':
         createSlider();
         break;
       case 'marvin':
@@ -96,16 +99,15 @@ effectsList.addEventListener('change', function (evt) {
       case 'heat':
         createSlider(1, 3, 3, 0.1);
         break;
-      case 'none':
-        createSlider();
-        break;
     }
 
-    uploadPreviewImage.classList.forEach(function (currentClass) {
-      uploadPreviewImage.classList.remove(currentClass);
-    });
-    uploadPreviewImage.classList.add(`effects__preview--${evt.target.value}`);
-    sliderHandler(evt.target.value);
+    if (currentEffect) {
+      previewImage.classList.remove(currentEffect);
+    }
+    currentEffect = `effects__preview--${evt.target.value}`
+    previewImage.classList.add(`effects__preview--${evt.target.value}`);
+
+    setSliderHandler(evt.target.value);
   }
 });
 

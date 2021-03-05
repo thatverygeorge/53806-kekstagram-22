@@ -5,14 +5,14 @@ const SCALE_STEP = 25;
 const scaleControlSmaller = document.querySelector('.scale__control--smaller');
 const scaleControlBigger = document.querySelector('.scale__control--bigger');
 const scaleControlValue = document.querySelector('.scale__control--value');
-const uploadPreviewImage = document.querySelector('.img-upload__preview img');
+const previewImage = document.querySelector('.img-upload__preview img');
 
 let scaleValue = 100;
 
 const setScaleValue = function (value) {
   scaleValue = value;
   scaleControlValue.value = `${value}%`;
-  uploadPreviewImage.style.transform = `scale(${value / 100})`;
+  previewImage.style.transform = `scale(${value / 100})`;
 }
 
 scaleControlSmaller.addEventListener('click', function () {

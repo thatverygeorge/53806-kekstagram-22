@@ -9,6 +9,8 @@ import { showPopup } from './show-popup.js'
 const INITIAL_IMAGE_SCALE = 100;
 const FILE_TYPES = ['jpg', 'jpeg', 'png', 'webp'];
 
+const bodyElement = document.querySelector('body');
+
 const imageUploadForm = document.querySelector('.img-upload__form');
 const effectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const imageUploadInput = document.querySelector('.img-upload__input');
@@ -18,7 +20,7 @@ const imageUploadCancel = document.querySelector('.img-upload__cancel');
 const successPopup = document.querySelector('#success').content.querySelector('.success');
 const errorPopup = document.querySelector('#error').content.querySelector('.error');
 
-const uploadPreviewImage = document.querySelector('.img-upload__preview img');
+const previewImage = document.querySelector('.img-upload__preview img');
 const effectsPreviewMiniatures = document.querySelectorAll('.effects__preview');
 
 const onImageUploadCancelClick = function () {
@@ -34,7 +36,7 @@ const onImageUploadOverlayEscKeydown = function (evt) {
 
 const closeImageUploadOverlay = function () {
   imageUploadOverlay.classList.add('hidden');
-  document.querySelector('body').classList.remove('modal-open');
+  bodyElement.classList.remove('modal-open');
   imageUploadInput.value = null;
   setScaleValue(INITIAL_IMAGE_SCALE);
   resetEffect();
@@ -46,7 +48,7 @@ const closeImageUploadOverlay = function () {
 const openImageUploadOverlay = function () {
   imageUploadOverlay.classList.remove('hidden');
   effectLevelFieldset.classList.add('hidden');
-  document.querySelector('body').classList.add('modal-open');
+  bodyElement.classList.add('modal-open');
   imageUploadCancel.addEventListener('click', onImageUploadCancelClick);
   document.addEventListener('keydown', onImageUploadOverlayEscKeydown);
   setScaleValue(INITIAL_IMAGE_SCALE);
@@ -72,7 +74,7 @@ imageUploadInput.addEventListener('change', function (evt) {
     const reader = new FileReader();
 
     reader.addEventListener('load', function () {
-      uploadPreviewImage.src = reader.result;
+      previewImage.src = reader.result;
       setMiniatures(reader.result);
     });
 

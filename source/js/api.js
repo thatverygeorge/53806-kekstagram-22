@@ -9,20 +9,16 @@ const sendData = function (data, onSuccess, onError) {
   )
     .then(function (response) {
       if (response.ok) {
-        onSuccess();
         return response.json();
       }
 
-      onError();
       throw new Error(`${response.status} — ${response.statusText}`);
     })
-    .then(function (json) {
-      // eslint-disable-next-line no-console
-      console.log(json);
+    .then(function () {
+      onSuccess();
     })
-    .catch(function (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+    .catch(function () {
+      onError();
     });
 }
 
@@ -39,16 +35,13 @@ const getData = function (onSuccess, onError) {
         return response.json();
       }
 
-      onError();
       throw new Error(`${response.status} — ${response.statusText}`);
     })
     .then(function (json) {
       onSuccess(json);
-      return json;
     })
-    .catch(function (err) {
-      // eslint-disable-next-line no-console
-      console.log(err);
+    .catch(function () {
+      onError();
     });
 }
 

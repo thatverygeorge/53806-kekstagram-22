@@ -3,33 +3,33 @@ import { onImageUploadOverlayEscKeydown } from './image-upload-overlay.js';
 
 const MAX_COMMENT_LENGTH = 140;
 
-const textDescriptionInput = document.querySelector('.text__description');
+const commentInput = document.querySelector('.text__description');
 const imageUploadSubmit = document.querySelector('.img-upload__submit');
 
 const clearTextDescriptionInput = function () {
-  textDescriptionInput.value = '';
+  commentInput.value = '';
 }
 
 const validateComment = function () {
   let message;
 
-  if (!checkStringLength(textDescriptionInput.value, MAX_COMMENT_LENGTH)) {
+  if (!checkStringLength(commentInput.value, MAX_COMMENT_LENGTH)) {
     message = `Длина комментария не должна превышать ${MAX_COMMENT_LENGTH} симв.`;
-    setMyCustomValidity(textDescriptionInput, message, imageUploadSubmit);
+    setMyCustomValidity(commentInput, message, imageUploadSubmit);
   } else {
-    removeMyCustomValidity(textDescriptionInput, imageUploadSubmit);
+    removeMyCustomValidity(commentInput, imageUploadSubmit);
   }
 
-  textDescriptionInput.reportValidity();
+  commentInput.reportValidity();
 }
 
-textDescriptionInput.addEventListener('input', validateComment);
+commentInput.addEventListener('input', validateComment);
 
-textDescriptionInput.addEventListener('focus', function () {
+commentInput.addEventListener('focus', function () {
   document.removeEventListener('keydown', onImageUploadOverlayEscKeydown);
 });
 
-textDescriptionInput.addEventListener('blur', function () {
+commentInput.addEventListener('blur', function () {
   document.addEventListener('keydown', onImageUploadOverlayEscKeydown);
 });
 
