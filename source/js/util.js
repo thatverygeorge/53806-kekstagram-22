@@ -24,7 +24,7 @@ const removeMyCustomValidity = function (input, button) {
   button.disabled = false;
 }
 
-const debounce = (cb, timeout) => {
+const debounce = function (cb, timeout) {
   let isTimeOut = false;
   let timeoutID = 0;
 

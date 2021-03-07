@@ -1,4 +1,6 @@
 const COMMENTS_TO_ADD = 5;
+const COMMENT_AVATAR_WIDTH = 35;
+const COMMENT_AVATAR_HEIGHT = 35;
 
 const commentsList = document.querySelector('.social__comments');
 const commentsLoader = document.querySelector('.comments-loader');
@@ -12,8 +14,8 @@ const createCommentElement = function (comment) {
   commentElementImage.classList.add('social__picture');
   commentElementImage.src = comment.avatar;
   commentElementImage.alt = comment.name;
-  commentElementImage.width = '35';
-  commentElementImage.height = '35';
+  commentElementImage.width = COMMENT_AVATAR_WIDTH.toString();
+  commentElementImage.height = COMMENT_AVATAR_HEIGHT.toString();
 
   commentElement.appendChild(commentElementImage);
 
@@ -55,8 +57,7 @@ const renderComments = function (picture) {
       commentsLoader.classList.remove('hidden');
     }
 
-    const commentCountHTML = `${currentNumberOfComments} из <span class="comments-count">${comments.length}</span> комментариев`;
-    bigPictureSocialCommentCount.innerHTML = commentCountHTML;
+    bigPictureSocialCommentCount.innerHTML = `${currentNumberOfComments} из <span class="comments-count">${comments.length}</span> комментариев`;
   }
 }
 
