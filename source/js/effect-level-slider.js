@@ -1,7 +1,7 @@
 import noUiSlider from 'nouislider';
 import 'nouislider/distribute/nouislider.css';
 
-const efectLevelFieldset = document.querySelector('.img-upload__effect-level');
+const effectLevelFieldset = document.querySelector('.img-upload__effect-level');
 const effectLevelSlider = document.querySelector('.effect-level__slider');
 const effectsList = document.querySelector('.effects__list');
 const effectLevelValue = document.querySelector('.effect-level__value');
@@ -9,7 +9,7 @@ const effectInputNone = document.querySelector('#effect-none');
 const previewImage = document.querySelector('.img-upload__preview img');
 
 const createSlider = function (min = 0, max = 1, start = 1, step = 0.1) {
-  efectLevelFieldset.classList.remove('hidden');
+  effectLevelFieldset.classList.remove('hidden');
 
   noUiSlider.create(effectLevelSlider, {
     range: {
@@ -34,7 +34,7 @@ const createSlider = function (min = 0, max = 1, start = 1, step = 0.1) {
 }
 
 const destroySlider = function () {
-  efectLevelFieldset.classList.add('hidden');
+  effectLevelFieldset.classList.add('hidden');
   effectLevelSlider.noUiSlider.destroy();
 }
 
